@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - Pizzaria Delícia</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #fff7e6;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background: #b30000;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            font-size: 26px;
+            font-weight: bold;
+        }
+        .container {
+            max-width: 600px;
+            margin: 30px auto;
+            background: #fff;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        h2 {
+            margin-bottom: 15px;
+            color: #b30000;
+        }
+        label {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        select, input {
+            width: 100%;
+            padding: 12px;
+            margin-top: 8px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+        button {
+            width: 100%;
+            padding: 15px;
+            background: green;
+            border: none;
+            color: #fff;
+            font-size: 20px;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+        button:hover { background: #0f7a0f; }
+
+        .painel-pagamentos {
+            margin-top: 30px;
+            padding: 20px;
+            background: #ffe6cc;
+            border-radius: 8px;
+            border: 2px dashed #b30000;
+        }
+        .painel-pagamentos h3 {
+            color: #b30000;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<header>🍕 Checkout - Pizzaria Delícia</header>
+
+<div class="container">
+
+    <h2>Escolha a Forma de Pagamento</h2>
+
+    <label for="pagamento">Forma de pagamento:</label>
+    <select id="pagamento">
+        <option>PIX</option>
+        <option>Cartão de Crédito</option>
+        <option>Cartão de Débito</option>
+        <option>Pagar na Entrega</option>
+    </select>
+
+    <h2>Endereço de Entrega</h2>
+
+    <input type="text" id="rua" placeholder="Rua / Avenida" required>
+    <input type="text" id="numero" placeholder="Número" required>
+    <input type="text" id="bairro" placeholder="Bairro" required>
+    <input type="text" id="cidade" placeholder="Cidade" required>
+    <input type="text" id="cep" placeholder="CEP" required>
+
+    <!-- 🔥 BOTÃO COM VALIDAÇÃO -->
+    <button onclick="validarCampos()">
+        Finalizar Pedido e Pagar
+    </button>
+
+    <div class="painel-pagamentos">
+        <h3>📥 Painel de Pagamentos</h3>
+        <p>Após finalizar o pedido, o pagamento será processado pelo Mercado Pago.</p>
+    </div>
+
+</div>
+
+<script>
+function validarCampos() {
+
+    let rua = document.getElementById('rua').value.trim();
+    let numero = document.getElementById('numero').value.trim();
+    let bairro = document.getElementById('bairro').value.trim();
+    let cidade = document.getElementById('cidade').value.trim();
+    let cep = document.getElementById('cep').value.trim();
+
+    if (rua === "" || numero === "" || bairro === "" || cidade === "" || cep === "") {
+        alert("⚠ Por favor, preencha todos os campos de endereço antes de continuar.");
+        return;
+    }
+
+    // Tudo preenchido → direciona para o Mercado Pago
+    window.location.href = "https://link.mercadopago.com.br/pizzamercado";
+}
+</script>
+
+</body>
+</html>

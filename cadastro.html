@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pizzaria Delícia - Login</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f7e9d7;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background: #fff5eb;
+            padding: 30px;
+            border-radius: 15px;
+            width: 360px;
+            text-align: center;
+            box-shadow: 0px 4px 10px rgba(0,0,0,0.15);
+            border: 2px solid #b30000;
+        }
+
+        h2 {
+            color: #b30000;
+            margin-bottom: 15px;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #b30000;
+            border-radius: 8px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            background: #b30000;
+            color: #fff;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background: #800000;
+        }
+
+        .switch {
+            color: #b30000;
+            cursor: pointer;
+            text-decoration: underline;
+            margin-top: 10px;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2 id="titulo">Login</h2>
+
+        <form id="form">
+
+            <input type="email" id="email" placeholder="Email" required>
+            <input type="password" id="senha" placeholder="Senha" required>
+
+            <div id="extra"></div>
+
+            <button type="submit" id="btn">Entrar</button>
+
+        </form>
+
+        <span class="switch" onclick="trocarModo()" id="switchText">
+            Não tem conta? Cadastre-se
+        </span>
+    </div>
+
+    <script>
+        let modoCadastro = false;
+
+        function trocarModo() {
+            modoCadastro = !modoCadastro;
+
+            if (modoCadastro) {
+                document.getElementById("titulo").innerText = "Cadastro";
+                document.getElementById("btn").innerText = "Cadastrar";
+                document.getElementById("switchText").innerText = "Já tem conta? Faça login";
+            } else {
+                document.getElementById("titulo").innerText = "Login";
+                document.getElementById("btn").innerText = "Entrar";
+                document.getElementById("switchText").innerText = "Não tem conta? Cadastre-se";
+            }
+        }
+
+        document.getElementById("form").addEventListener("submit", function(e){
+            e.preventDefault();
+
+            let email = document.getElementById("email").value;
+            let senha = document.getElementById("senha").value;
+
+            // BANCO DE DADOS (localStorage)
+            let users = JSON.parse(localStorage.getItem("users")) || [];
+
+            if (modoCadastro) {
+                // VERIFICAR SE JÁ EXISTE
+                let existe = users.find(u => u.email === email);
+
+                if (existe) {
+                    alert("Este email já está cadastrado!");
+                    return;
+                }
+
+                users.push({ email: email, senha: senha });
+                localStorage.setItem("users", JSON.stringify(users));
+
+                alert("Cadastro realizado com sucesso!");
+                trocarModo(); // volta para login
+            } 
+            else {
+                // LOGIN
+                let usuario = users.find(u => u.email === email && u.senha === senha);
+
+                if (!usuario) {
+                    alert("Email ou senha incorretos.");
+                    return;
+                }
+
+                alert("Login realizado com sucesso!");
+
+                // REDIRECIONA PARA O SITE DA PIZZARIA
+                window.location.href = "file:///C:/Users/CCE%20i3/Downloads/site%20simples%20bradesco/cardapio.html";
+            }
+        });
+    </script>
+
+</body>
+</html>

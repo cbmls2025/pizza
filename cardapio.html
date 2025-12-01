@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pizzaria - Promoções</title>
+
+    <link rel="stylesheet" href="globals.css">
+</head>
+<body>
+
+    <header>
+        <div class="logo">🍕 Pizzaria Delícia</div>
+    </header>
+
+    <!-- 🔥 PROMOÇÃO COM PREÇO ANTES E DEPOIS -->
+    <div class="promocao">
+        🔥 Promoções de até <strong>25% OFF</strong> nas melhores pizzas! 🔥
+        <div class="precos-promo">
+            De <span class="preco-antigo">R$ 39,90</span> por <span class="preco-novo">R$ 29,90</span>
+        </div>
+    </div>
+
+    <section class="cardapio">
+
+        <!-- PIZZAS -->
+        <div class="pizza">
+            <label>Quantidade:</label>
+            <input type="number" min="1" value="1" class="qtd" style="width:60px;padding:5px;margin:5px;">
+            <br>
+
+            <label>Adicionais:</label>
+            <select class="extra" style="padding:6px;margin-top:5px;">
+                <option value="0">Nenhum</option>
+                <option value="5">+ Bacon (R$ 5,00)</option>
+                <option value="7">+ Queijo Extra (R$ 7,00)</option>
+                <option value="4">+ Catupiry (R$ 4,00)</option>
+            </select>
+
+            <button onclick="comprar(this, 'Pizza Margherita', 29.90)"
+                style="margin-top:10px;padding:8px 12px;background:#b30000;color:#fff;border:none;border-radius:6px;cursor:pointer;">
+                Adicionar ao Carrinho
+            </button>
+
+            <img src="/imagem/pizza calabresa.jfif" alt="Pizza Margherita">
+            <h3>Pizza Margherita</h3>
+
+            <!-- Preço atualizado com desconto -->
+            <div class="preco">R$ 29,90</div>
+        </div>
+
+
+        <div class="pizza">
+            <label>Quantidade:</label>
+            <input type="number" min="1" value="1" class="qtd" style="width:60px;padding:5px;margin:5px;">
+            <br>
+
+            <label>Adicionais:</label>
+            <select class="extra" style="padding:6px;margin-top:5px;">
+                <option value="0">Nenhum</option>
+                <option value="5">+ Bacon (R$ 5,00)</option>
+                <option value="7">+ Queijo Extra (R$ 7,00)</option>
+                <option value="4">+ Catupiry (R$ 4,00)</option>
+            </select>
+
+            <button onclick="comprar(this, 'Pizza Calabresa', 29.90)"
+                style="margin-top:10px;padding:8px 12px;background:#b30000;color:#fff;border:none;border-radius:6px;cursor:pointer;">
+                Adicionar ao Carrinho
+            </button>
+
+            <img src="/imagem/pizza calabresa.jfif" alt="Pizza Calabresa">
+            <h3>Pizza Calabresa</h3>
+            <div class="preco">R$ 29,90</div>
+        </div>
+
+
+        <div class="pizza">
+            <label>Quantidade:</label>
+            <input type="number" min="1" value="1" class="qtd" style="width:60px;padding:5px;margin:5px;">
+            <br>
+
+            <label>Adicionais:</label>
+            <select class="extra" style="padding:6px;margin-top:5px;">
+                <option value="0">Nenhum</option>
+                <option value="5">+ Bacon (R$ 5,00)</option>
+                <option value="7">+ Queijo Extra (R$ 7,00)</option>
+                <option value="4">+ Catupiry (R$ 4,00)</option>
+            </select>
+          
+            <button onclick="comprar(this, 'Pizza 4 Queijos', 29.90)"
+                style="margin-top:10px;padding:8px 12px;background:#b30000;color:#fff;border:none;border-radius:6px;cursor:pointer;">
+                Adicionar ao Carrinho
+            </button>
+          
+            <img src="" alt="Pizza catupiry>
+            <h3>Pizza 4 Queijos</h3>
+            <div class="preco">R$ 29,90</div>
+        </div>
+        
+        <div class="pizza">
+            <label>Quantidade:</label>
+            <input type="number" min="1" value="1" class="qtd" style="width:60px;padding:5px;margin:5px;">
+            <br>
+
+            <label>Adicionais:</label>
+            <select class="extra" style="padding:6px;margin-top:5px;">
+                <option value="0">Nenhum</option>
+                <option value="5">+ Bacon (R$ 5,00)</option>
+                <option value="7">+ Queijo Extra (R$ 7,00)</option>
+                <option value="4">+ Catupiry (R$ 4,00)</option>
+            </select>
+
+            <button onclick="comprar(this, 'Pizza Portuguesa', 29.90)"
+                style="margin-top:10px;padding:8px 12px;background:#b30000;color:#fff;border:none;border-radius:6px;cursor:pointer;">
+                Adicionar ao Carrinho
+            </button>
+
+            <img src="/imagem/pizza calabresa.jfif" alt="Pizza Portuguesa">
+            <h3>Pizza Portuguesa</h3>
+            <div class="preco">R$ 29,90</div>
+        </div>
+
+    </section>
+
+    <!-- CARRINHO -->
+    <div style="background:#fff;padding:20px;margin:20px;border-radius:10px;box-shadow:0 4px 10px rgba(0,0,0,0.1);">
+        <h2 style="color:#b30000;text-align:center;">🛒 Carrinho</h2>
+        <ul id="listaCarrinho" style="list-style:none;padding:0;font-size:18px;"></ul>
+        <p style="font-size:20px;font-weight:bold;text-align:center;">Total: R$ <span id="totalCarrinho">0.00</span></p>
+    </div>
+
+    <!-- FINALIZAR COMPRA -->
+    <div style="text-align:center;margin-bottom:40px;">
+        <button 
+            onclick="finalizarPedido()"
+            style="padding:15px 25px;font-size:18px;background:green;color:#fff;border:none;border-radius:10px;cursor:pointer;">
+            Finalizar Compra
+        </button>
+    </div>
+
+    <script>
+        function finalizarPedido() {
+            localStorage.setItem('carrinhoPizzaria', JSON.stringify(carrinho));
+            window.location.href = "checkout.html";
+        }
+
+        function comprar(btn, nome, preco) {
+            let qtd = parseInt(btn.parentElement.querySelector('.qtd').value);
+            let extra = parseFloat(btn.parentElement.querySelector('.extra').value);
+            let totalItem = (preco + extra) * qtd;
+            adicionarCarrinho(`${nome} (x${qtd})`, totalItem);
+        }
+
+        let carrinho = [];
+
+        function adicionarCarrinho(nome, preco) {
+            carrinho.push({ nome, preco });
+            atualizarCarrinho();
+        }
+
+        function atualizarCarrinho() {
+            let lista = document.getElementById("listaCarrinho");
+            let total = document.getElementById("totalCarrinho");
+            lista.innerHTML = "";
+
+            let soma = 0;
+            carrinho.forEach(item => {
+                let li = document.createElement("li");
+                li.textContent = `${item.nome} - R$ ${item.preco.toFixed(2)}`;
+                lista.appendChild(li);
+                soma += item.preco;
+            });
+
+            total.textContent = soma.toFixed(2);
+        }
+    </script>
+
+</body>
+</html>
