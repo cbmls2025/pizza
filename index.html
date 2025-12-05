@@ -5,69 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pizzaria Delícia - Login</title>
 
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f7e9d7;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-
-        .container {
-            background: #fff5eb;
-            padding: 30px;
-            border-radius: 15px;
-            width: 360px;
-            text-align: center;
-            box-shadow: 0px 4px 10px rgba(0,0,0,0.15);
-            border: 2px solid #b30000;
-        }
-
-        h2 {
-            color: #b30000;
-            margin-bottom: 15px;
-        }
-
-        input {
-            width: 100%;
-            padding: 12px;
-            margin: 10px 0;
-            border: 1px solid #b30000;
-            border-radius: 8px;
-        }
-
-        button {
-            width: 100%;
-            padding: 12px;
-            border: none;
-            background: #b30000;
-            color: #fff;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 16px;
-            margin-top: 10px;
-        }
-
-        button:hover {
-            background: #800000;
-        }
-
-        .switch {
-            color: #b30000;
-            cursor: pointer;
-            text-decoration: underline;
-            margin-top: 10px;
-            display: inline-block;
-        }
-    </style>
+    <link rel="stylesheet" href="Globals.css">
 </head>
 <body>
 
-    <div class="container">
-        <h2 id="titulo">Login</h2>
+    <div class="auth-page">
+        <div class="auth-container">
+            <img src="/imagem/banner 2.png" alt="Logo" class="logo-img">
+            <h2 class="auth-title" id="titulo">Login</h2>
 
         <form id="form">
 
@@ -76,13 +21,12 @@
 
             <div id="extra"></div>
 
-            <button type="submit" id="btn">Entrar</button>
+            <button type="submit" id="btn" class="btn-primary">Entrar</button>
 
         </form>
 
-        <span class="switch" onclick="trocarModo()" id="switchText">
-            Não tem conta? Cadastre-se
-        </span>
+        <span class="switch" onclick="trocarModo()" id="switchText">Não tem conta? Cadastre-se</span>
+        </div>
     </div>
 
     <script>
@@ -91,14 +35,23 @@
         function trocarModo() {
             modoCadastro = !modoCadastro;
 
-            if (modoCadastro) {
-                document.getElementById("titulo").innerText = "Cadastro";
-                document.getElementById("btn").innerText = "Cadastrar";
-                document.getElementById("switchText").innerText = "Já tem conta? Faça login";
+                if (modoCadastro) {
+                    document.getElementById("titulo").innerText = "Cadastro";
+                    document.getElementById("btn").innerText = "Cadastrar";
+                    document.getElementById("switchText").innerText = "Já tem conta? Faça login";
+
+                    // adicionar campos extras para cadastro
+                    document.getElementById('extra').innerHTML = `
+                        <input type="text" id="nome" placeholder="Nome completo" required>
+                        <input type="tel" id="telefone" placeholder="Telefone (opcional)">
+                        <input type="password" id="senha2" placeholder="Confirme a senha" required>
+                    `;
             } else {
                 document.getElementById("titulo").innerText = "Login";
                 document.getElementById("btn").innerText = "Entrar";
                 document.getElementById("switchText").innerText = "Não tem conta? Cadastre-se";
+                    // remover campos extras
+                    document.getElementById('extra').innerHTML = '';
             }
         }
 
@@ -112,6 +65,19 @@
             let users = JSON.parse(localStorage.getItem("users")) || [];
 
             if (modoCadastro) {
+                let nome = document.getElementById('nome') ? document.getElementById('nome').value.trim() : '';
+                let telefone = document.getElementById('telefone') ? document.getElementById('telefone').value.trim() : '';
+                let senha2 = document.getElementById('senha2') ? document.getElementById('senha2').value : '';
+
+                if (!nome) {
+                    alert('Por favor informe seu nome completo.');
+                    return;
+                }
+
+                if (senha !== senha2) {
+                    alert('As senhas não conferem.');
+                    return;
+                }
                 // VERIFICAR SE JÁ EXISTE
                 let existe = users.find(u => u.email === email);
 
@@ -120,7 +86,7 @@
                     return;
                 }
 
-                users.push({ email: email, senha: senha });
+                users.push({ email: email, senha: senha, nome: nome, telefone: telefone });
                 localStorage.setItem("users", JSON.stringify(users));
 
                 alert("Cadastro realizado com sucesso!");

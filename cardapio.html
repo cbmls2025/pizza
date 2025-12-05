@@ -42,7 +42,7 @@
                 Adicionar ao Carrinho
             </button>
 
-            <img src="/imagem/pizza calabresa.jfif" alt="Pizza Margherita">
+            <img src="/imagem/pizza margarita.jfif" alt="Pizza Margherita">
             <h3>Pizza Margherita</h3>
 
             <!-- Preço atualizado com desconto -->
@@ -68,7 +68,7 @@
                 Adicionar ao Carrinho
             </button>
 
-            <img src="/imagem/pizza calabresa.jfif" alt="Pizza Calabresa">
+            <img src="/imagem/calabresa2.jfif" alt="Pizza Calabresa">
             <h3>Pizza Calabresa</h3>
             <div class="preco">R$ 29,90</div>
         </div>
@@ -92,7 +92,7 @@
                 Adicionar ao Carrinho
             </button>
           
-            <img src="" alt="Pizza catupiry>
+            <img src="/imagem/pizza 4 queijo.jfif" alt="Pizza 4 Queijos">
             <h3>Pizza 4 Queijos</h3>
             <div class="preco">R$ 29,90</div>
         </div>
@@ -115,9 +115,112 @@
                 Adicionar ao Carrinho
             </button>
 
-            <img src="/imagem/pizza calabresa.jfif" alt="Pizza Portuguesa">
+            <img src="/imagem/pizza portuguesa.jfif" alt="Pizza Portuguesa">
             <h3>Pizza Portuguesa</h3>
             <div class="preco">R$ 29,90</div>
+        </div>
+
+    </section>
+
+     <section class="cardapio">
+
+        <!-- PIZZAS -->
+        <div class="pizza">
+            <label>Quantidade:</label>
+            <input type="number" min="1" value="1" class="qtd" style="width:60px;padding:5px;margin:5px;">
+            <br>
+
+            <label>Adicionais:</label>
+            <select class="extra" style="padding:6px;margin-top:5px;">
+                <option value="0">Nenhum</option>
+                <option value="4.5">+ mm (R$ 4,50)</option>
+                <option value="2.5">+ morango(R$ 2,50)</option>
+                <option value="4">+ gotas de chocolate(R$ 4,00)</option>
+            </select>
+
+            <button onclick="comprar(this, 'Pizza de chocolate com morango', 29.90)"
+                style="margin-top:10px;padding:8px 12px;background:#b30000;color:#fff;border:none;border-radius:6px;cursor:pointer;">
+                Adicionar ao Carrinho
+            </button>
+
+            <img src="/imagem/pizza de chocolate com morango.jfif" alt="Pizza de chocolate com morango">
+            <h3>Pizza de chocolate com morango</h3>
+
+            <!-- Preço atualizado com desconto -->
+            <div class="preco">R$ 29,90</div>
+        </div>
+
+
+        <div class="pizza">
+            <label>Quantidade:</label>
+            <input type="number" min="1" value="1" class="qtd" style="width:60px;padding:5px;margin:5px;">
+            <br>
+
+            <label>Adicionais:</label>
+            <select class="extra" style="padding:6px;margin-top:5px;">
+                <option value="0">Nenhum</option>
+                <option value="4">+ mm (R$ 4,00)</option>
+                <option value="2.5">+ morango(R$ 2,50)</option>
+                <option value="6">+ gotas de chocolate(R$ 6,00)</option>
+            </select>
+
+            <button onclick="comprar(this, 'chocolate branco', 29.90)"
+                style="margin-top:10px;padding:8px 12px;background:#b30000;color:#fff;border:none;border-radius:6px;cursor:pointer;">
+                Adicionar ao Carrinho
+            </button>
+
+            <img src="/imagem/pizza de chocolate branco.jfif" alt="Pizza chocolate branco">
+            <h3>Pizza chocolate branco</h3>
+            <div class="preco">R$ 29,90</div>
+        </div>
+
+
+        <div class="pizza">
+            <label>Quantidade:</label>
+            <input type="number" min="1" value="1" class="qtd" style="width:60px;padding:5px;margin:5px;">
+            <br>
+
+            <label>Adicionais:</label>
+            <select class="extra" style="padding:6px;margin-top:5px;">
+                <option value="0">Nenhum</option>
+                <option value="4">+ mm (R$ 4,00)</option>
+                <option value="2.5">+ morango(R$ 2,50)</option>
+                <option value="6">+ gotas de chocolate(R$ 6,00)</option>
+            </select>
+          
+            <button onclick="comprar(this, 'Pizza de prestigio', 29.90)"
+                style="margin-top:10px;padding:8px 12px;background:#b30000;color:#fff;border:none;border-radius:6px;cursor:pointer;">
+                Adicionar ao Carrinho
+            </button>
+          
+            <img src="/imagem/pizza de prestigio.jfif" alt="Pizza de prestigio">
+            <h3>Pizza de prestigio</h3>
+            <div class="preco">R$ 29,90</div>
+        </div>
+        
+        <div class="pizza">
+            <label>Quantidade:</label>
+            <input type="number" min="1" value="1" class="qtd" style="width:60px;padding:5px;margin:5px;">
+            <br>
+
+            <label>Adicionais:</label>
+            <select class="extra" style="padding:6px;margin-top:5px;">
+                <option value="0">Nenhum</option>
+                <option value="3.5">+ Bacon (R$ 3,50)</option>
+                <option value="5">+ Queijo Extra (R$ 5,00)</option>
+                <option value="4">+ Catupiry (R$ 4,00)</option>
+                <option value="3">+ mussarela (R$ 3,00)</option>
+                <option value="7">+ chocolate (R$ 7,00)</option>
+            </select>
+
+            <button onclick="comprar(this, 'esfira', 0.99)"
+                style="margin-top:10px;padding:8px 12px;background:#b30000;color:#fff;border:none;border-radius:6px;cursor:pointer;">
+                Adicionar ao Carrinho
+            </button>
+
+            <img src="/imagem/esfiras1.jfif" alt="Pizza Esfira">
+            <h3>Pizza Esfira</h3>
+            <div class="preco">R$ 0.99</div>
         </div>
 
     </section>
@@ -130,7 +233,12 @@
     </div>
 
     <!-- FINALIZAR COMPRA -->
-    <div style="text-align:center;margin-bottom:40px;">
+    <div style="text-align:center;margin-bottom:40px;display:flex;gap:12px;justify-content:center;align-items:center;flex-wrap:wrap;">
+        <button onclick="limparCarrinho()" class="btn-limpar" 
+            style="padding:10px 20px;background:#444;color:white;border:none;border-radius:8px;margin-top:10px;cursor:pointer;">
+            Limpar Carrinho
+        </button>
+
         <button 
             onclick="finalizarPedido()"
             style="padding:15px 25px;font-size:18px;background:green;color:#fff;border:none;border-radius:10px;cursor:pointer;">
@@ -139,19 +247,36 @@
     </div>
 
     <script>
+        let carrinho = [];
+
         function finalizarPedido() {
+
+            if (carrinho.length === 0) {
+                alert("O carrinho está vazio!");
+                return;
+            }
+
+            // Salva no navegador para o checkout usar
             localStorage.setItem('carrinhoPizzaria', JSON.stringify(carrinho));
+
+            // Vai para o checkout
             window.location.href = "checkout.html";
         }
 
         function comprar(btn, nome, preco) {
             let qtd = parseInt(btn.parentElement.querySelector('.qtd').value);
             let extra = parseFloat(btn.parentElement.querySelector('.extra').value);
+
+            if (qtd <= 0) {
+                alert("Selecione uma quantidade válida.");
+                return;
+            }
+
+            // Calcular total do item
             let totalItem = (preco + extra) * qtd;
+
             adicionarCarrinho(`${nome} (x${qtd})`, totalItem);
         }
-
-        let carrinho = [];
 
         function adicionarCarrinho(nome, preco) {
             carrinho.push({ nome, preco });
@@ -161,17 +286,37 @@
         function atualizarCarrinho() {
             let lista = document.getElementById("listaCarrinho");
             let total = document.getElementById("totalCarrinho");
-            lista.innerHTML = "";
 
+            lista.innerHTML = "";
             let soma = 0;
+
             carrinho.forEach(item => {
                 let li = document.createElement("li");
-                li.textContent = `${item.nome} - R$ ${item.preco.toFixed(2)}`;
+                li.textContent = `${item.nome} — R$ ${item.preco.toFixed(2)}`;
                 lista.appendChild(li);
+
                 soma += item.preco;
             });
 
             total.textContent = soma.toFixed(2);
+        }
+
+        function limparCarrinho() {
+            if (carrinho.length === 0) {
+                alert("O carrinho já está vazio.");
+                return;
+            }
+
+            // Esvazia o array do carrinho
+            carrinho = [];
+
+            // Remove versão armazenada no localStorage
+            localStorage.removeItem('carrinhoPizzaria');
+
+            // Atualiza a interface
+            atualizarCarrinho();
+
+            alert('Carrinho esvaziado com sucesso!');
         }
     </script>
 

@@ -5,76 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Checkout - Pizzaria Delícia</title>
 
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #fff7e6;
-            margin: 0;
-            padding: 0;
-        }
-        header {
-            background: #b30000;
-            color: #fff;
-            padding: 20px;
-            text-align: center;
-            font-size: 26px;
-            font-weight: bold;
-        }
-        .container {
-            max-width: 600px;
-            margin: 30px auto;
-            background: #fff;
-            padding: 25px;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        }
-        h2 {
-            margin-bottom: 15px;
-            color: #b30000;
-        }
-        label {
-            font-size: 18px;
-            font-weight: bold;
-        }
-        select, input {
-            width: 100%;
-            padding: 12px;
-            margin-top: 8px;
-            margin-bottom: 20px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            font-size: 16px;
-        }
-        button {
-            width: 100%;
-            padding: 15px;
-            background: green;
-            border: none;
-            color: #fff;
-            font-size: 20px;
-            border-radius: 10px;
-            cursor: pointer;
-        }
-        button:hover { background: #0f7a0f; }
+    <link rel="stylesheet" href="Globals.css">
 
-        .painel-pagamentos {
-            margin-top: 30px;
-            padding: 20px;
-            background: #ffe6cc;
-            border-radius: 8px;
-            border: 2px dashed #b30000;
-        }
-        .painel-pagamentos h3 {
-            color: #b30000;
-            margin-bottom: 10px;
-        }
-    </style>
 </head>
-<body>
+<body class="checkout-page">
 
 <header>🍕 Checkout - Pizzaria Delícia</header>
 
-<div class="container">
+<div class="checkout-container">
+    <!-- RESUMO DO CARRINHO -->
+    <section class="resumo-carrinho">
+        <h2>Resumo do Pedido</h2>
+        <ul id="resumoCarrinho" class="resumo-list"></ul>
+        <div class="resumo-total">Total do pedido: R$ <span id="totalCheckout">0.00</span></div>
+    </section>
 
     <h2>Escolha a Forma de Pagamento</h2>
 
@@ -95,7 +39,7 @@
     <input type="text" id="cep" placeholder="CEP" required>
 
     <!-- 🔥 BOTÃO COM VALIDAÇÃO -->
-    <button onclick="validarCampos()">
+    <button id="btnFinalizar" onclick="validarCampos()">
         Finalizar Pedido e Pagar
     </button>
 
@@ -120,8 +64,55 @@ function validarCampos() {
         return;
     }
 
-    // Tudo preenchido → direciona para o Mercado Pago
-    window.location.href = "https://link.mercadopago.com.br/pizzamercado";
+    // Verifica se há valor salvo em pedidoTotal e redireciona com ele
+    let pedidoTotal = parseFloat(localStorage.getItem('pedidoTotal') || '0');
+
+    if (!pedidoTotal || pedidoTotal <= 0) {
+        alert('O carrinho está vazio — adicione itens antes de finalizar o pedido.');
+        return;
+    }
+
+    // Redireciona para o pagamento usando apenas o amount salvo (comportamento anterior)
+    const mercadoLink = `https://link.mercadopago.com.br/pizzamercado?amount=${pedidoTotal.toFixed(2)}`;
+    window.location.href = mercadoLink;
+}
+
+// Carrega itens do carrinho quando a página for carregada
+document.addEventListener('DOMContentLoaded', function() {
+    carregarCarrinhoCheckout();
+});
+
+function carregarCarrinhoCheckout() {
+    const carrinho = JSON.parse(localStorage.getItem('carrinhoPizzaria')) || [];
+    const resumoEl = document.getElementById('resumoCarrinho');
+    const totalEl = document.getElementById('totalCheckout');
+    const btnFinalizar = document.getElementById('btnFinalizar');
+
+    resumoEl.innerHTML = '';
+    let soma = 0;
+
+    if (!carrinho || carrinho.length === 0) {
+        resumoEl.innerHTML = '<li class="resumo-item empty">Seu carrinho está vazio.</li>';
+        totalEl.textContent = '0.00';
+        if (btnFinalizar) { btnFinalizar.disabled = true; btnFinalizar.style.opacity = '0.6'; }
+        localStorage.removeItem('pedidoTotal');
+        return;
+    }
+
+    carrinho.forEach(item => {
+        const li = document.createElement('li');
+        li.className = 'resumo-item';
+        // item.preco pode ser number; garantir toFixed
+        li.textContent = `${item.nome} — R$ ${Number(item.preco).toFixed(2)}`;
+        resumoEl.appendChild(li);
+        soma += Number(item.preco);
+    });
+
+    totalEl.textContent = soma.toFixed(2);
+    if (btnFinalizar) { btnFinalizar.disabled = false; btnFinalizar.style.opacity = '1'; }
+
+    // salvar total para uso ao finalizar
+    localStorage.setItem('pedidoTotal', soma.toFixed(2));
 }
 </script>
 
